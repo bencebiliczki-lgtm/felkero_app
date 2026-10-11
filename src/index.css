@@ -21,6 +21,7 @@ h1 { margin: 0; color: var(--cherry); font: 700 clamp(38px, 7vw, 60px)/1.15 Geor
 .divider { display: block; width: 40px; height: 1px; background: var(--gold); margin: 32px auto; }
 .question { margin: 0 0 30px; font: clamp(23px, 4vw, 29px)/1.5 Georgia, serif; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.no-button-slot { display: inline-flex; min-width: 112px; min-height: 48px; }
 button { min-height: 48px; min-width: 112px; padding: 12px 24px; border: 1px solid transparent; border-radius: 5px; font: 600 14px "Segoe UI", system-ui, sans-serif; cursor: pointer; transition: background 150ms; }
 button:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
 .primary { background: var(--cherry); color: #fffdf9; }
@@ -53,4 +54,5 @@ button:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
   .context { margin-bottom: 36px; letter-spacing: 1px; }
   .actions { gap: 8px; }
   button { min-width: 0; padding: 12px 18px; }
+  .no-button-slot { min-width: 68px; }
 }

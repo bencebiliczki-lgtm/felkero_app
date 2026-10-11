@@ -16,6 +16,37 @@ export default function App() {
   const reactionDialog = useRef(null)
   const acceptanceDialog = useRef(null)
   const audioPlayer = useRef(null)
+  const noButton = useRef(null)
+  const noMotion = useRef(null)
+
+  useEffect(() => {
+    const attempt = reaction?.attempt ?? 0
+    if (!attempt) return
+    let frame
+    let previousTime
+    const speed = 70 * attempt
+
+    function move(time) {
+      const button = noButton.current
+      const motion = noMotion.current
+      const elapsed = previousTime === undefined ? 0 : Math.min((time - previousTime) / 1000, 0.05)
+      previousTime = time
+      const maxX = Math.max(0, window.innerWidth - button.offsetWidth - 8)
+      const maxY = Math.max(0, window.innerHeight - button.offsetHeight - 8)
+      motion.x += motion.dx * speed * elapsed
+      motion.y += motion.dy * speed * elapsed
+      if (motion.x <= 8 || motion.x >= maxX) motion.dx *= -1
+      if (motion.y <= 8 || motion.y >= maxY) motion.dy *= -1
+      motion.x = Math.max(8, Math.min(maxX, motion.x))
+      motion.y = Math.max(8, Math.min(maxY, motion.y))
+      button.style.left = `${motion.x}px`
+      button.style.top = `${motion.y}px`
+      frame = requestAnimationFrame(move)
+    }
+
+    frame = requestAnimationFrame(move)
+    return () => cancelAnimationFrame(frame)
+  }, [reaction?.attempt])
 
   useEffect(() => {
     if (reaction && !reactionDialog.current.open) reactionDialog.current.showModal()
@@ -44,6 +75,17 @@ export default function App() {
   }
 
   function decline() {
+    if (!noMotion.current) {
+      const rect = noButton.current.getBoundingClientRect()
+      noMotion.current = { x: rect.left, y: rect.top, dx: 1, dy: -0.7 }
+      Object.assign(noButton.current.style, {
+        position: 'fixed',
+        left: `${rect.left}px`,
+        top: `${rect.top}px`,
+        width: `${rect.width}px`,
+        zIndex: '2',
+      })
+    }
     setAnswer('no')
     setConfetti(null)
     setAudioError(null)
@@ -98,7 +140,9 @@ export default function App() {
         <p className="question">Leszel a Firma keresztapám?</p>
         <div className="actions" aria-label="Válasz a felkérésre">
           <button className="primary" onClick={accept} aria-pressed={answer === 'yes'}>Igen</button>
-          <button className="secondary" onClick={decline} aria-pressed={answer === 'no'}>Nem</button>
+          <span className="no-button-slot">
+            <button ref={noButton} className="secondary" onClick={decline} aria-pressed={answer === 'no'}>Nem</button>
+          </span>
           <button className="disabled" disabled>Végleges nem</button>
         </div>
         <p className="answer" role="status">{answer === 'yes' ? 'Van keresztapám! Jó szerencsét, Firma!' : answer === 'no' ? (reaction?.attempt >= 4 ? ':D Rendben Firmám' : 'De kérlek!') : ''}</p>
