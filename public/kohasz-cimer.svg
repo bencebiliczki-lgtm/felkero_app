@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 380" fill="none">
+  <title>Kohász címer – a daloskönyv alapján készült stilizált rajz</title>
+  <g stroke="#AD8C50" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- A két szerszám a könyvön látható elrendezésben. -->
+    <path d="M20 112 108 42 133 69 44 139Z"/>
+    <path d="M79 111 117 148H137L94 99"/>
+    <path d="M239 35 313 87 341 123 283 108 217 66Z"/>
+    <path d="M247 89 211 148H230L263 101"/>
+    <!-- Az edény pereme, abroncsai és lábai. -->
+    <path d="M53 149H313L278 330H95Z"/>
+    <path d="M57 165H310M62 191H305M74 253H293"/>
+    <path d="M92 330H281V345H92Z"/>
+    <path d="M97 345 90 357 102 368 119 346M258 345 274 366 285 357 276 345"/>
+    <!-- A középső kampó kitakarja a mögötte futó abroncsokat. -->
+    <path fill="#FFFDF9" d="M171 65H190V133C190 158 197 175 215 195 229 211 240 230 236 250 232 272 216 286 193 288 164 291 140 278 131 256 126 244 124 230 128 219 134 211 145 220 157 231 164 238 172 242 181 239 196 234 201 219 191 208 183 199 174 197 167 185 160 174 157 159 157 140V65Z"/>
+    <circle cx="180" cy="226" r="24" fill="#FFFDF9"/>
+    <path fill="#FFFDF9" d="M159 43V19H188V43M141 43H207V65H141Z"/>
+  </g>
+</svg>
